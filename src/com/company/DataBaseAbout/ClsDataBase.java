@@ -201,10 +201,6 @@ public class ClsDataBase {
             stuClass.getStuGrade().getClsDataBase().add(ptrClass);
             ptrClass.setStuGrade(stuClass.getStuGrade());
         }
-        if(stuClass.getStudents() != null || !ptrClass.getStudents().equals(stuClass.getStudents())){
-            stuClass.getStudents().
-            ptrClass.setStudents(stuClass.getStudents());
-        }
         if(stuClass.getClassTeacher() != null || !ptrClass.getClassTeacher().equals(stuClass.getClassTeacher())){
             ptrClass.setClassTeacher(stuClass.getClassTeacher());
         }
