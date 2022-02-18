@@ -137,4 +137,7 @@ public class StuDataBase {
     public void setStudentHashMap(HashMap<Integer, Student> studentHashMap) {
         this.studentHashMap = studentHashMap;
     }
+
+    public void delectStu() {
+    }
 }

@@ -32,9 +32,30 @@ public class ClsDataBase {
     }
     //-------------------------------------
 
+    //-------------删除数据库---------------
+    //清空数据库
+    public void delete() {
+        if(this.stuClassArrayList != null) {
+            this.stuClassArrayList = null;
+        }
+        if(this.stuClassHashMap != null) {
+            this.stuClassHashMap = null;
+        }
+    }
+
+    public void delete() {
+        if(this.stuClassArrayList != null) {
+            this.stuClassArrayList = null;
+            for(StuClass stuClass : )
+        }
+        if(this.stuClassHashMap != null) {
+            this.stuClassHashMap = null;
+        }
+    }
+
     //-------------删除班级----------------
     //直接删除
-    public void delete(StuClass stuClass) {
+    public void deleteCls(StuClass stuClass) {
         if(allClsDataBase.stuClassHashMap.get(stuClass.getId()) != null) {
             allClsDataBase.stuClassArrayList.remove(stuClass);
             allClsDataBase.stuClassHashMap.remove(stuClass.getId(),stuClass);
@@ -46,7 +67,7 @@ public class ClsDataBase {
     }
 
     //安全删除
-    public void deleteS(StuClass stuClass) {
+    public void deleteClsS(StuClass stuClass) {
         if(stuClass.getStuGrade() != null) {
             delete(stuClass);
         }
@@ -71,15 +92,6 @@ public class ClsDataBase {
         }
     }
 
-    //清空数据库
-    public void deleteAll() {
-        if(this.stuClassArrayList != null) {
-            this.stuClassArrayList = null;
-        }
-        if(this.stuClassHashMap != null) {
-            this.stuClassHashMap = null;
-        }
-    }
     //-------------------------------------
 
     //-------------查找班级----------------
@@ -202,6 +214,7 @@ public class ClsDataBase {
             ptrClass.setStuGrade(stuClass.getStuGrade());
         }
         if(stuClass.getClassTeacher() != null || !ptrClass.getClassTeacher().equals(stuClass.getClassTeacher())){
+            stuClass.getClassTeacher().setTeaClass(ptrClass);
             ptrClass.setClassTeacher(stuClass.getClassTeacher());
         }
         if(stuClass.getSchedule() != null || !ptrClass.getSchedule().equals(stuClass.getSchedule())){

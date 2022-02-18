@@ -1,5 +1,7 @@
 package com.company.BaseClass.Hunman;
 
+import com.company.BaseClass.StuAbout.StuClass;
+import com.company.BaseClass.StuAbout.StuGrade;
 import com.company.DataBaseAbout.AlDataBase;
 import com.company.DataBaseAbout.LsnDataBase;
 
@@ -15,6 +17,57 @@ public class Teacher extends Person {
     private int office;
     private boolean ClsTch;
     //------------------------------------//
+
+    //------删除成员------//
+    public void delete() {
+        teaGrade = null;
+        teaClass.setClassTeacher(null);
+        teaClass = null;
+    }
+    //-------------------//
+
+    //------查找成员------//
+    public StuGrade getTeaGrade() {
+        return teaGrade;
+    }
+
+    public StuClass getTeaClass() {
+        return teaClass;
+    }
+    //-------------------//
+
+    //------修改成员------//
+    public void modify(ClassTeacher classTeacher){
+        if(classTeacher.getTeaClass() != null || !classTeacher.getTeaClass().equals(this.teaClass)){
+            this.teaClass = classTeacher.teaClass;
+        }
+        if(classTeacher.getTeaGrade() != null || !classTeacher.getTeaGrade().equals(this.teaGrade)){
+            this.teaGrade = classTeacher.teaGrade;
+        }
+    }
+
+    public void setTeaGrade(StuGrade teaGrade) {
+        this.teaGrade = teaGrade;
+    }
+
+    public void setTeaClass(StuClass teaClass) {
+        this.teaClass = teaClass;
+    }
+    //-------------------//
+
+    //------插入成员------//
+    public ClassTeacher() {
+    }
+
+    public ClassTeacher(String name, boolean gender, int age, LsnDataBase lessons, int office, StuGrade teaGrade, StuClass teaClass) {
+        super(name, gender, age, lessons, office);
+        this.teaGrade = teaGrade;
+        this.teaClass = teaClass;
+    }
+    //-------------------//
+    public Teacher() {
+    }
+
     private int IdCounter(){
         Month temMonth = Month.of(LocalDate.now().getMonthValue());
         if( !(temMonth.equals(AlDataBase.getMonth())) ) {
@@ -75,5 +128,9 @@ public class Teacher extends Person {
 
     public void setOffice(int office) {
         this.office = office;
+    }
+
+    public static void countAdd() {
+        ++ count;
     }
 }

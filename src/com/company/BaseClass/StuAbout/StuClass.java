@@ -84,4 +84,7 @@ public class StuClass {
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
+
+    public void delete() {
+    }
 }

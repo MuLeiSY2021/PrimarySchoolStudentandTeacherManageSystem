@@ -5,6 +5,7 @@ import com.company.BaseClass.Score;
 import com.company.BaseClass.StuAbout.StuClass;
 import com.company.BaseClass.StuAbout.StuGrade;
 import com.company.DataBaseAbout.AlDataBase;
+import com.company.DataBaseAbout.LsnDataBase;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -20,6 +21,52 @@ public class Student extends Person {
     private Score score;
 
     //----------------------------------//
+
+    //------删除成员------//
+    public void delete() {
+        stuClass.getStudents().delectStu();
+        stuClass = null;
+        classTeacher = null;
+
+    }
+    //-------------------//
+
+    //------查找成员------//
+    public StuGrade getTeaGrade() {
+        return teaGrade;
+    }
+
+    public StuClass getTeaClass() {
+        return teaClass;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+    //-------------------//
+
+    //------修改成员------//
+    public void modify(ClassTeacher classTeacher){
+        if(classTeacher.getTeaClass() != null || !classTeacher.getTeaClass().equals(this.teaClass)){
+            this.teaClass = classTeacher.teaClass;
+        }
+        if(classTeacher.getTeaGrade() != null || !classTeacher.getTeaGrade().equals(this.teaGrade)){
+            this.teaGrade = classTeacher.teaGrade;
+        }
+    }
+
+    public void setTeaGrade(StuGrade teaGrade) {
+        this.teaGrade = teaGrade;
+    }
+
+    public void setTeaClass(StuClass teaClass) {
+        this.teaClass = teaClass;
+    }
+
+    public static void countAdd() {
+        ++ count;
+    }
+
     private int IdCounter(){
         Month temMonth = Month.of(LocalDate.now().getMonthValue());
         if( !(temMonth.equals(AlDataBase.getMonth())) ) {
@@ -28,15 +75,10 @@ public class Student extends Person {
         }
         return Year.now().getValue()*10000000 + AlDataBase.getMonth().getValue()*100000 + count;
     }
+    //-------------------//
 
-    public Student(int id) {
-        this.id = id;
-    }
-
-    public Student(String name, boolean gender, int age) {
-        super(name, gender, age);
-        this.id = IdCounter();
-        count++;
+    //------插入成员------//
+    public Student() {
     }
 
     public Student(String name, boolean gender, int age, StuClass stuClass, ClassTeacher classTeacher, Schedule schedule, Score score) {
@@ -46,9 +88,11 @@ public class Student extends Person {
         this.schedule = schedule;
         this.score = score;
         this.id = IdCounter();
-        count++;
+        Student.countAdd();
     }
+    //-------------------//
 
+    //------其他方法------//
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,48 +105,5 @@ public class Student extends Person {
     public int hashCode() {
         return Objects.hash(id);
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public StuClass getStuClass() {
-        return stuClass;
-    }
-
-    public void setStuClass(StuClass stuClass) {
-        this.stuClass = stuClass;
-    }
-
-    public ClassTeacher getClassTeacher() {
-        return classTeacher;
-    }
-
-    public void setClassTeacher(ClassTeacher classTeacher) {
-        this.classTeacher = classTeacher;
-    }
-
-    public static int getCount() {
-        return count;
-    }
-
-    public static void setCount(int count) {
-        Student.count = count;
-    }
-
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
-
-    public Score getScoreList() {
-        return score;
-    }
-
-    public void setScoreList(Score score) {
-        this.score = score;
-    }
+    //-------------------//
 }
